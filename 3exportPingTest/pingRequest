@@ -1,0 +1,8 @@
+Blockly.Blocks['ping'] = {
+  init: function() {
+    this.setInputsInline(true);
+    this.setColour(225);
+ this.setTooltip("Creates a ping endpoint which returns 200 a get and 503 for a post");
+ this.setHelpUrl("");
+  }
+};

@@ -1,0 +1,45 @@
+
+
+<h1>HELLO!</h1>
+
+<p id="boopText">BLEEP</p>
+
+<script src="/home/charlie/Applications/hmrc-development-environment/hmrc/BlocklyTest/exportJSTest/bleepBloop.js"></script>
+
+<button type="button" onclick="myFunction('boop')">Boop it!</button>
+
+<button type="button" onclick="myFunction('bleep')">Bleep it!</button>
+
+<script src="/home/charlie/Applications/hmrc-development-environment/hmrc/blockly/blockly_compressed.js"></script>
+<script src="/home/charlie/Applications/hmrc-development-environment/hmrc/blockly/blocks_compressed.js"></script>
+<script src="/home/charlie/Applications/hmrc-development-environment/hmrc/blockly/msg/js/en.js"></script>
+<script src="/home/charlie/Applications/hmrc-development-environment/hmrc/blockly/javascript_compressed.js"></script>
+
+<div id="blocklyDiv" style="height: 480px; width: 600px;"></div>
+
+<xml id="toolbox" style="display: none">
+  <block type="controls_if"></block>
+  <block type="controls_repeat_ext"></block>
+  <block type="logic_compare"></block>
+  <block type="math_number"></block>
+  <block type="math_arithmetic"></block>
+  <block type="text"></block>
+  <block type="text_print"></block>
+</xml>
+
+<script>
+  var workspacePlayground = Blockly.inject('blocklyDiv',
+      {toolbox: document.getElementById('toolbox')});
+
+  function execute() {
+    var code = Blockly.JavaScript.workspaceToCode(workspacePlayground);
+
+    try {
+        eval(code);
+    } catch (e) {
+        alert(e);
+    }
+    }
+</script>
+
+<button type="button" onclick="execute()">"execute that code boiii!"</button>

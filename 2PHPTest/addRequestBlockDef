@@ -1,0 +1,8 @@
+[{
+  "type": "ping",
+  "message0": "",
+  "inputsInline": true,
+  "colour": 225,
+  "tooltip": "Creates a ping endpoint which returns 200 a get and 503 for a post",
+  "helpUrl": ""
+}]

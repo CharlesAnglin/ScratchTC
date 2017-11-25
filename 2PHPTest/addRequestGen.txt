@@ -1,0 +1,4 @@
+Blockly.PHP['ping'] = function(block) {
+  var code = '<?php\n $total = 0;\nforeach ($_GET as $key=>$value) {\n$total += (int)$value;\n};\necho $total;\n?>';
+  return code;
+};
