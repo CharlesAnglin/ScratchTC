@@ -1,0 +1,10 @@
+Blockly.Blocks['pingrequest2'] = {
+  init: function() {
+    this.appendValueInput("fileName")
+        .setCheck("String")
+        .appendField("file name");
+    this.setColour(230);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
