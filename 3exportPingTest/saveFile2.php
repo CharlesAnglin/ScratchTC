@@ -3,7 +3,7 @@
     $fileName = $_GET["fileName"];
 
     $body = file_get_contents('php://input');
-    $myFile = fopen($fileName, "w");
+    $myFile = fopen("myEndpoints/".$fileName, "w");
     fwrite($myFile, $body);
 
     http_response_code(200);

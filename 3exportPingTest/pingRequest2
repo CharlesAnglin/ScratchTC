@@ -1,5 +1,7 @@
 Blockly.Blocks['pingrequest2'] = {
   init: function() {
+  	this.appendDummyInput()
+  		.appendField("Ping Request");
     this.appendValueInput("fileName")
         .setCheck("String")
         .appendField("file name");
