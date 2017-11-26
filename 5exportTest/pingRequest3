@@ -1,0 +1,16 @@
+Blockly.Blocks['pingrequest3'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Ping Request");
+    this.appendDummyInput()
+        .appendField("file name")
+        .appendField(new Blockly.FieldTextInput("myRequest"), "fileName");
+    this.appendStatementInput("requestParams")
+        .setCheck("String")
+        .appendField("request params");
+    this.setInputsInline(false);
+    this.setColour(230);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
