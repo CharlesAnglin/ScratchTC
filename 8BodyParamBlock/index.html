@@ -1,0 +1,345 @@
+
+
+<h1>HELLO!</h1>
+
+<h1>request with body exports fine.... But original request won't change it's name and won't export different code when we change it's generator... why????</h1>
+
+<script src="http://localhost/blockly/blockly_compressed.js"></script>
+<script src="http://localhost/blockly/blocks_compressed.js"></script>
+<script src="http://localhost/blockly/en.js"></script>
+<script src="http://localhost/blockly/php_compressed.js"></script>
+
+<script src="http://localhost/techChal/saveFileTest/functionRequest"></script>
+<script src="http://localhost/techChal/saveFileTest/functionRequest.js"></script>
+<script src="http://localhost/techChal/saveFileTest/bodyRequest"></script>
+<script src="http://localhost/techChal/saveFileTest/bodyRequest.js"></script>
+<script src="http://localhost/techChal/saveFileTest/request_body"></script>
+<script src="http://localhost/techChal/saveFileTest/request_body.js"></script>
+
+<div id="blocklyDiv" style="height: 480px; width: 600px;"></div>
+
+<xml id="toolbox" style="display: none">
+  <category name="APIs" expanded="true">
+    <block type="functionRequest"></block>
+    <block type="bodyRequest"></block>
+    <block type="request_body"></block>
+  </category>
+  <category name="Variables" custom="VARIABLE"></category>
+  <category name="Functions">
+    <block type="procedures_defnoreturn"></block>
+    <block type="procedures_defreturn"></block>
+    <block type="procedures_ifreturn"></block>
+  </category>
+  <sep></sep>
+  <category name="Logic">
+    <block type="controls_if"></block>
+    <block type="logic_compare"></block>
+    <block type="logic_operation"></block>
+    <block type="logic_negate"></block>
+    <block type="logic_boolean"></block>
+    <block type="logic_null"></block>
+    <block type="logic_ternary"></block>
+  </category>
+  <category name="Loops">
+    <block type="controls_repeat_ext">
+      <value name="TIMES">
+        <shadow type="math_number">
+          <field name="NUM">10</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="controls_whileUntil"></block>
+    <block type="controls_for">
+      <value name="FROM">
+        <shadow type="math_number">
+          <field name="NUM">1</field>
+        </shadow>
+      </value>
+      <value name="TO">
+        <shadow type="math_number">
+          <field name="NUM">10</field>
+        </shadow>
+      </value>
+      <value name="BY">
+        <shadow type="math_number">
+          <field name="NUM">1</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="controls_forEach"></block>
+    <block type="controls_flow_statements"></block>
+  </category>
+  <category name="Maths">
+    <block type="math_number"></block>
+    <block type="math_arithmetic">
+      <value name="A">
+        <shadow type="math_number">
+          <field name="NUM">1</field>
+        </shadow>
+      </value>
+      <value name="B">
+        <shadow type="math_number">
+          <field name="NUM">1</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="math_single">
+      <value name="NUM">
+        <shadow type="math_number">
+          <field name="NUM">9</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="math_trig">
+      <value name="NUM">
+        <shadow type="math_number">
+          <field name="NUM">45</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="math_constant"></block>
+    <block type="math_number_property">
+      <value name="NUMBER_TO_CHECK">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="math_round">
+      <value name="NUM">
+        <shadow type="math_number">
+          <field name="NUM">3.1</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="math_on_list"></block>
+    <block type="math_modulo">
+      <value name="DIVIDEND">
+        <shadow type="math_number">
+          <field name="NUM">64</field>
+        </shadow>
+      </value>
+      <value name="DIVISOR">
+        <shadow type="math_number">
+          <field name="NUM">10</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="math_constrain">
+      <value name="VALUE">
+        <shadow type="math_number">
+          <field name="NUM">50</field>
+        </shadow>
+      </value>
+      <value name="LOW">
+        <shadow type="math_number">
+          <field name="NUM">1</field>
+        </shadow>
+      </value>
+      <value name="HIGH">
+        <shadow type="math_number">
+          <field name="NUM">100</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="math_random_int">
+      <value name="FROM">
+        <shadow type="math_number">
+          <field name="NUM">1</field>
+        </shadow>
+      </value>
+      <value name="TO">
+        <shadow type="math_number">
+          <field name="NUM">100</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="math_random_float"></block>
+  </category>
+  <category name="Text">
+    <block type="text"></block>
+    <block type="text_join"></block>
+    <block type="text_append">
+      <value name="TEXT">
+        <shadow type="text"></shadow>
+      </value>
+    </block>
+    <block type="text_length">
+      <value name="VALUE">
+        <shadow type="text">
+          <field name="TEXT">abc</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="text_isEmpty">
+      <value name="VALUE">
+        <shadow type="text">
+          <field name="TEXT"></field>
+        </shadow>
+      </value>
+    </block>
+    <block type="text_indexOf">
+      <value name="VALUE">
+        <block type="variables_get">
+          <field name="VAR">{textVariable}</field>
+        </block>
+      </value>
+      <value name="FIND">
+        <shadow type="text">
+          <field name="TEXT">abc</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="text_charAt">
+      <value name="VALUE">
+        <block type="variables_get">
+          <field name="VAR">{textVariable}</field>
+        </block>
+      </value>
+    </block>
+    <block type="text_getSubstring">
+      <value name="STRING">
+        <block type="variables_get">
+          <field name="VAR">{textVariable}</field>
+        </block>
+      </value>
+    </block>
+    <block type="text_changeCase">
+      <value name="TEXT">
+        <shadow type="text">
+          <field name="TEXT">abc</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="text_trim">
+      <value name="TEXT">
+        <shadow type="text">
+          <field name="TEXT">abc</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="text_print">
+      <value name="TEXT">
+        <shadow type="text">
+          <field name="TEXT">abc</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="text_prompt_ext">
+      <value name="TEXT">
+        <shadow type="text">
+          <field name="TEXT">abc</field>
+        </shadow>
+      </value>
+    </block>
+  </category>
+  <category name="Lists">
+    <block type="lists_create_with">
+      <mutation items="0"></mutation>
+    </block>
+    <block type="lists_create_with"></block>
+    <block type="lists_repeat">
+      <value name="NUM">
+        <shadow type="math_number">
+          <field name="NUM">5</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="lists_length"></block>
+    <block type="lists_isEmpty"></block>
+    <block type="lists_indexOf">
+      <value name="VALUE">
+        <block type="variables_get">
+          <field name="VAR">{listVariable}</field>
+        </block>
+      </value>
+    </block>
+    <block type="lists_getIndex">
+      <value name="VALUE">
+        <block type="variables_get">
+          <field name="VAR">{listVariable}</field>
+        </block>
+      </value>
+    </block>
+    <block type="lists_setIndex">
+      <value name="LIST">
+        <block type="variables_get">
+          <field name="VAR">{listVariable}</field>
+        </block>
+      </value>
+    </block>
+    <block type="lists_getSublist">
+      <value name="LIST">
+        <block type="variables_get">
+          <field name="VAR">{listVariable}</field>
+        </block>
+      </value>
+    </block>
+    <block type="lists_split">
+      <value name="DELIM">
+        <shadow type="text">
+          <field name="TEXT">,</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="lists_sort"></block>
+  </category>
+</xml>
+
+<script>
+  var workspacePlayground = Blockly.inject('blocklyDiv',
+      {toolbox: document.getElementById('toolbox')});
+
+  function execute() {
+    var code = Blockly.PHP.workspaceToCode(workspacePlayground);
+
+    console.log("raw output:\n" + code)
+
+    try {
+      var cleanedCode = code.replace("// Describe this function...\n", "")
+
+      var fileCodeArray = cleanedCode.split("\n<fileName>\n");
+      var fileName = fileCodeArray[1].replace("'","").replace("'","");
+
+      var bodyCodeArray = fileCodeArray[2].split("\n<bodyRequest>\n");
+
+      var phpCode = "<?php\n" + bodyCodeArray[1] + fileCodeArray[0] + bodyCodeArray[2] + "\n?>";
+
+      console.log("fileName: " + fileName);
+      console.log("phpCode: " + phpCode);
+
+      var xhttp = new XMLHttpRequest();
+      xhttp.open("POST", "saveFile2.php?fileName="+fileName+".php", true);
+      xhttp.send(phpCode);
+    } catch (e) {
+        alert(e);
+    }
+    }
+
+  function exportBlocks(fileName) {
+    var exportXml = Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(workspacePlayground));
+    console.log("exporting blocks:\n" + exportXml);
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "saveBlock.php?fileName="+fileName, true);
+    xhttp.send(exportXml);
+  }
+
+  function importBlocks(fileName) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", "getBlock.php?fileName="+fileName, false);
+    xhttp.send();
+    var xml = xhttp.responseText;
+    console.log("returned xml:\n"+xml);
+    Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(xml), workspacePlayground);
+  }
+
+</script>
+
+<button type="button" onclick="execute()">execute that code boiii!</button>
+  <div>
+  <input type="text" id="blockNameInput">block name
+  <div>
+    <button type="button" onclick="exportBlocks(document.getElementById('blockNameInput').value)">export block</button>
+    <button type="button" onclick="importBlocks(document.getElementById('blockNameInput').value)">import block</button>
+  </div>
+</div>
