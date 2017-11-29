@@ -69,9 +69,8 @@ Blockly.PHP['functionRequest'] = function(block) {
   }
   var httpResponseCode = 'http_response_code(' + value_return_status + ');\n';
   var functionCallCode = funcName + '(' + phpArgs.toString() + ')';
-  var bodyResponseCode = 'echo("funct return value: " . ' + functionCallCode + ');\n';
-  var requestBodyCode = "\n<bodyRequest>\n" + '\n' + "\n<bodyRequest>\n";
-  var apiDef = "\n<fileName>\n" + text_filename + "\n<fileName>\n" + requestBodyCode + bodyResponseCode + httpResponseCode;
+  var bodyResponseCode = 'echo(' + functionCallCode + ');\n';
+  var apiDef = "\n<fileName>\n" + text_filename + "\n<fileName>\n" + bodyResponseCode + httpResponseCode;
 
 
 

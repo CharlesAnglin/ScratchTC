@@ -296,12 +296,9 @@
     try {
       var cleanedCode = code.replace("// Describe this function...\n", "")
 
-      var fileCodeArray = cleanedCode.split("\n<fileName>\n");
-      var fileName = fileCodeArray[1].replace("'","").replace("'","");
-
-      var bodyCodeArray = fileCodeArray[2].split("\n<bodyRequest>\n");
-
-      var phpCode = "<?php\n" + bodyCodeArray[1] + fileCodeArray[0] + bodyCodeArray[2] + "\n?>";
+      var codeArray = cleanedCode.split("\n<fileName>\n");
+      var fileName = codeArray[1].replace("'","").replace("'","");
+      var phpCode = "<?php\n" + codeArray[0] + codeArray[2] + "\n?>";
 
       console.log("fileName: " + fileName);
       console.log("phpCode: " + phpCode);
@@ -310,7 +307,8 @@
       xhttp.open("POST", "saveFile2.php?fileName="+fileName+".php", true);
       xhttp.send(phpCode);
     } catch (e) {
-        alert(e);
+      console.log(e);
+      alert("To export an API you must use an API block");
     }
     }
 

@@ -56,6 +56,7 @@ Blockly.PHP['bodyRequest'] = function(block) {
     args[i] = Blockly.PHP.variableDB_.getName(block.arguments_[i],
         Blockly.Variables.NAME_TYPE);
   }
+  args.push("$request_body");
   var functionDef = 'function ' + funcName + '(' + args.join(', ') + ') {\n' +
       globals + branch + returnValue + '}';
 
@@ -67,10 +68,11 @@ Blockly.PHP['bodyRequest'] = function(block) {
   for(var i = 0; i < block.arguments_.length; i++){
     phpArgs[i] = '$_GET["' + block.arguments_[i] + '"]';
   }
+  phpArgs.push("$request_body");
   var httpResponseCode = 'http_response_code(' + value_return_status + ');\n';
   var functionCallCode = funcName + '(' + phpArgs.toString() + ')';
-  var bodyResponseCode = 'echo("funct return value: " . ' + functionCallCode + ');\n';
-  var requestBodyCode = "\n<bodyRequest>\n" + '$request_body = file_get_contents("php://input");\n' + "\n<bodyRequest>\n";
+  var bodyResponseCode = 'echo(' + functionCallCode + ');\n';
+  var requestBodyCode = '$request_body = file_get_contents("php://input");\n';
   var apiDef = "\n<fileName>\n" + text_filename + "\n<fileName>\n" + requestBodyCode + bodyResponseCode + httpResponseCode;
 
 
