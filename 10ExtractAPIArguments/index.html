@@ -7,6 +7,10 @@
 <body>
 <h1>HELLO!</h1>
 
+<h1>
+  TODO: MyEnpoints table. Add header and add arguemnts etc....
+</h1>
+
 <script src="http://localhost/blockly/blockly_compressed.js"></script>
 <script src="http://localhost/blockly/blocks_compressed.js"></script>
 <script src="http://localhost/blockly/en.js"></script>
@@ -27,8 +31,9 @@
 <div id="My endpoints" class="tabcontent">
   <h3>My endpoints</h3>
   <p>Endpoints you've created</p>
-  <div id="myEnpointsJson">
-  </div>
+  <table id="endpoint-table">
+    <tr><td>You haven't defined any endpoints...</td></tr>
+</table>
 </div>
 
 <div id="Workspace" class="tabcontent" style="display: block;">
@@ -401,7 +406,42 @@
     xhttp.send();
     var json = JSON.parse(xhttp.responseText);
     console.log("returned json:\n"+JSON.stringify(json));
-    document.getElementById('myEnpointsJson').innerHTML = JSON.stringify(json);
+    // document.getElementById('myEnpointsJson').innerHTML = JSON.stringify(json);
+
+    // Object.keys(json).forEach(function(key){
+    //   console.log("json key: " + key);
+    // });
+
+    // console.log(Object.keys(json[0])[0]);
+    var apiTable = document.getElementById("endpoint-table");
+    if(json.length==0 && apiTable.rows[0].innerHTML.includes("defined")){
+      //leave it alone
+      console.log("leave table alone!");
+    } else if (json.length==0){
+      //delete all rows and add back in "no rows" message
+      for(var row in apiTable.rows){
+        apiTable.deleteRow(-1);
+      }
+      apiTable.insertRow(0).outerHTML="<tr><td>You haven't defined any endpoints...</td></tr>";
+    } else {
+      for(var row in apiTable.rows){
+        apiTable.deleteRow(-1);
+      }
+      console.log("deleted all rows");
+      //delete all rows and add headers + data
+      // apiTable.createTHead()
+      for(var i in json){
+      console.log(json[i]);
+      var fileName = Object.keys(json[i])[0];
+      try{
+        apiTable.rows[i].outerHTML = "<tr><td>"+fileName+"</td></tr>";
+      } catch(e) {
+        apiTable.insertRow(i).outerHTML= "<tr><td>"+fileName+"</td></tr>";
+      }
+    }
+    }
+
+    
   }
 
   function openTab(evt, tabName) {
