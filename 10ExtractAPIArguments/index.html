@@ -21,12 +21,14 @@
 
 <div class="tab">
   <button class="tablinks" onclick="openTab(event, 'Workspace')">Workspace</button>
-  <button class="tablinks" onclick="openTab(event, 'My endpoints')">My endpoints</button>
+  <button class="tablinks" onclick="openTab(event, 'My endpoints');getMyEndpoints()">My endpoints</button>
 </div>
 
 <div id="My endpoints" class="tabcontent">
   <h3>My endpoints</h3>
   <p>Endpoints you've created</p>
+  <div id="myEnpointsJson">
+  </div>
 </div>
 
 <div id="Workspace" class="tabcontent" style="display: block;">
@@ -343,6 +345,21 @@
       var xhttp = new XMLHttpRequest();
       xhttp.open("POST", "saveFile2.php?fileName="+fileName+".php", true);
       xhttp.send(phpCode);
+
+      // var jsonArguments = JSON.stringify(argumentsArray).replace(new RegExp('"', 'g'),"'");
+      // var apiDescription = "{'fileName' : '" + fileName + "', 'arguments' : " + jsonArguments + ", 'description' : ''}";
+
+      // var jsonArguments = JSON.stringify(argumentsArray).replace(new RegExp('"', 'g'),"'");
+      // var apiDescription = "{'arguments' : " + jsonArguments + ", 'description' : ''}";
+
+      var jsonArguments = JSON.stringify(argumentsArray);
+      var apiDescription = '{"arguments" : ' + jsonArguments + ', "description" : ""}';
+      console.log(apiDescription);
+
+      var xhttp = new XMLHttpRequest();
+      xhttp.open("POST", "saveFile2.php?fileName="+fileName+".json", true);
+      xhttp.send(apiDescription);
+
     } catch (e) {
       console.log(e);
       alert("To export an API you must use an API block");
@@ -376,6 +393,15 @@
     var xml = xhttp.responseText;
     console.log("returned xml:\n"+xml);
     Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(xml), workspacePlayground);
+  }
+
+  function getMyEndpoints() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", "getMyEndpoints.php", false);
+    xhttp.send();
+    var json = JSON.parse(xhttp.responseText);
+    console.log("returned json:\n"+JSON.stringify(json));
+    document.getElementById('myEnpointsJson').innerHTML = JSON.stringify(json);
   }
 
   function openTab(evt, tabName) {

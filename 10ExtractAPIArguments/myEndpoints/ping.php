@@ -2,9 +2,8 @@
 $status;
 $healthy;
 $body;
-$x;
 
-function do_a_healthcheck($healthy, $x) {
+function do_a_healthcheck($healthy) {
   global $status, $body;
   if ($healthy == 'true') {
     $status = 200;
@@ -17,7 +16,7 @@ function do_a_healthcheck($healthy, $x) {
 }
 
 
-echo(do_a_healthcheck($_GET["healthy"],$_GET["x"]));
+echo(do_a_healthcheck($_GET["healthy"]));
 http_response_code($status);
 
 ?>
