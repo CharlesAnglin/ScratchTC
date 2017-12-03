@@ -1,1 +1,1 @@
-{"arguments" : ["healthy"], "description" : "Returns 200 when var healthy is true.<br>Returns 500 otherwise.", "url" : "localhost/api/ping"}
+{"arguments" : ["healthy"], "description" : "Returns 200 when var healthy is true.<br>Returns 500 otherwise.", "url" : "charlieanglin.000webhostapp.com/api/ping"}
