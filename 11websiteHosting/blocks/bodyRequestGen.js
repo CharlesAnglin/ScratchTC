@@ -78,7 +78,9 @@ Blockly.PHP['bodyRequest'] = function(block) {
   for(var i = 0; i < block.arguments_.length; i++){
     argumentDelimeter[i] = '\n<arguments>\n' + block.arguments_[i] + '\n<arguments>\n';
   }
-  var apiDef = fileNameDelimiter + argumentDelimeter.toString() + requestBodyCode + bodyResponseCode + httpResponseCode;
+  var comment = block.comment.getText();
+  var commentDelimiter = "\n<commentDelim>\n" + comment + "\n<commentDelim>\n";
+  var apiDef = fileNameDelimiter + argumentDelimeter.toString() + commentDelimiter + requestBodyCode + bodyResponseCode + httpResponseCode;
 
 
 

@@ -332,20 +332,24 @@
       var codeWithoutFileName = filenameExtractArray[0];
       var fileName = filenameExtractArray[1][0].replace("'","").replace("'","");
       var argumentsExtractArray = removeDelimiters(codeWithoutFileName, "\n<arguments>\n");
-      var code = argumentsExtractArray[0];
-      var argumentsArray = argumentsExtractArray[1]
+      var codeWithoutArugments = argumentsExtractArray[0];
+      var argumentsArray = argumentsExtractArray[1];
+      var commentExtractArray = removeDelimiters(codeWithoutArugments, "\n<commentDelim>\n");
+      var code = commentExtractArray[0];
+      var comment = commentExtractArray[1][0].replace(/(\r\n|\n|\r)/gm,"<br>");
       var phpCode = "<?php\n" + code + "\n?>";
 
       console.log("api arguments: " + argumentsArray);
       console.log("fileName: " + fileName);
       console.log("phpCode: " + phpCode);
+      console.log("comment: " + comment);
 
       var xhttp = new XMLHttpRequest();
       xhttp.open("POST", "phpScripts/saveAPI.php?fileName="+fileName+".php", true);
       xhttp.send(phpCode);
 
       var jsonArguments = JSON.stringify(argumentsArray);
-      var apiDescription = '{"arguments" : ' + jsonArguments + ', "description" : ""}';
+      var apiDescription = '{"arguments" : '+jsonArguments+', "description" : "'+comment+'", "url" : "'+document.domain+'/api/'+fileName+'"}';
       console.log(apiDescription);
 
       var xhttp = new XMLHttpRequest();
@@ -418,7 +422,7 @@
       console.log("deleted all rows");
 
       //add header
-      apiTable.createTHead().insertRow(0).outerHTML="<tr><th>File name</th><th>arguments</th></tr>";
+      apiTable.createTHead().insertRow(0).outerHTML="<tr><th>Url</th><th>Arguments</th><th>Description</th></tr>";
 
       //add data
       for(var i in json){
@@ -426,10 +430,11 @@
       var fileName = Object.keys(json[i])[0].replace(".json","");
       var args = Object.values(json[i])[0].arguments;
       var description = Object.values(json[i])[0].description;
+      var url = Object.values(json[i])[0].url;
       try{
-        apiTable.rows[parseInt(i)+1].outerHTML = "<tr><td>"+fileName+"</td><td>"+args+"</td></tr>";
+        apiTable.rows[parseInt(i)+1].outerHTML = "<tr><td>"+url+"</td><td>"+args+"</td><td>"+description+"</td></tr>";
       } catch(e) {
-        apiTable.insertRow(parseInt(i)+1).outerHTML= "<tr><td>"+fileName+"</td><td>"+args+"</td></tr>";
+        apiTable.insertRow(parseInt(i)+1).outerHTML= "<tr><td>"+url+"</td><td>"+args+"</td><td>"+description+"</td></tr>";
       }
     }
     }
