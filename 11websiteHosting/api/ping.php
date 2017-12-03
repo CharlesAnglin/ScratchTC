@@ -16,6 +16,8 @@ function do_a_healthcheck($healthy) {
 }
 
 
+// Returns 200 when var healthy is true.
+// Returns 500 otherwise.
 echo(do_a_healthcheck($_GET["healthy"]));
 http_response_code($status);
 

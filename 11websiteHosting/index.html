@@ -24,20 +24,19 @@
 </div>
 
 <div id="My endpoints" class="tabcontent">
-  <h3>My endpoints</h3>
-  <p>Endpoints you've created</p>
+  <p><i>This is where you can find what endpoints are currently exposed.</i></p>
+  <p><i>To pass arguments use the optional variable notation, e.g. for a request called boop with two variables x, y use the following url:<br>'/api/boop?x=foo&y=bar'</i></p>
   <table id="endpoint-table">
     <tr><td>You haven't defined any endpoints...</td></tr>
   </table>
 </div>
 
-<div id="Workspace" class="tabcontent" style="display: block;">
-  <h3>Workspace</h3>
-  <p>Build stuff here!</p>
+<div id="Workspace" class="tabcontent" style="display: block;padding: 15px 15px;">
+
   <div id="blocklyDiv" style="height: 550px; width: 900px;"></div>
 
   <xml id="toolbox" style="display: none">
-    <category name="APIs" expanded="true">
+    <category name="APIs" expanded="false">
       <block type="functionRequest"></block>
       <block type="bodyRequest"></block>
       <block type="request_body"></block>
@@ -304,12 +303,19 @@
     </category>
   </xml>
 
-  <button type="button" onclick="execute()">execute that code boiii!</button>
-  <div>
-    <input type="text" id="blockNameInput">block name
+  <div style="padding: 5px 5px;">
+    <p><i>Expose your created endpoint by clicking here</i></p>
+    <button class="button" type="button" onclick="execute()">Create API</button>
+  </div>
+  <div style="padding: 10px 60px;">
+    <div style="padding: 5px 5px;">
+    <p><i>Import a previously saved block or export a block to save it.</i></p>
+      block name
+      <input type="text" id="blockNameInput">
+    </div>
     <div>
-      <button type="button" onclick="exportBlocks(document.getElementById('blockNameInput').value)">export block</button>
-      <button type="button" onclick="importBlocks(document.getElementById('blockNameInput').value)">import block</button>
+      <button class="button" type="button" onclick="exportBlocks(document.getElementById('blockNameInput').value)">export block</button>
+      <button class="button" type="button" onclick="importBlocks(document.getElementById('blockNameInput').value)">import block</button>
     </div>
   </div>
 </div>
@@ -336,7 +342,7 @@
       var argumentsArray = argumentsExtractArray[1];
       var commentExtractArray = removeDelimiters(codeWithoutArugments, "\n<commentDelim>\n");
       var code = commentExtractArray[0];
-      var comment = commentExtractArray[1][0].replace(/(\r\n|\n|\r)/gm,"<br>");
+      var comment = commentExtractArray[1][0].replace(/(\r\n|\n|\r)/gm,"<br>").replace(/"/g, "'");
       var phpCode = "<?php\n" + code + "\n?>";
 
       console.log("api arguments: " + argumentsArray);
