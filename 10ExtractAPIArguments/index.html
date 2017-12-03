@@ -33,7 +33,7 @@
   <p>Endpoints you've created</p>
   <table id="endpoint-table">
     <tr><td>You haven't defined any endpoints...</td></tr>
-</table>
+  </table>
 </div>
 
 <div id="Workspace" class="tabcontent" style="display: block;">
@@ -351,12 +351,6 @@
       xhttp.open("POST", "saveFile2.php?fileName="+fileName+".php", true);
       xhttp.send(phpCode);
 
-      // var jsonArguments = JSON.stringify(argumentsArray).replace(new RegExp('"', 'g'),"'");
-      // var apiDescription = "{'fileName' : '" + fileName + "', 'arguments' : " + jsonArguments + ", 'description' : ''}";
-
-      // var jsonArguments = JSON.stringify(argumentsArray).replace(new RegExp('"', 'g'),"'");
-      // var apiDescription = "{'arguments' : " + jsonArguments + ", 'description' : ''}";
-
       var jsonArguments = JSON.stringify(argumentsArray);
       var apiDescription = '{"arguments" : ' + jsonArguments + ', "description" : ""}';
       console.log(apiDescription);
@@ -414,7 +408,7 @@
 
     // console.log(Object.keys(json[0])[0]);
     var apiTable = document.getElementById("endpoint-table");
-    if(json.length==0 && apiTable.rows[0].innerHTML.includes("defined")){
+    if(json.length==0 && apiTable.rows[0].innerHTML.includes("You haven't defined any endpoints")){
       //leave it alone
       console.log("leave table alone!");
     } else if (json.length==0){
@@ -424,19 +418,25 @@
       }
       apiTable.insertRow(0).outerHTML="<tr><td>You haven't defined any endpoints...</td></tr>";
     } else {
+      //delete all rows and add headers + data
       for(var row in apiTable.rows){
         apiTable.deleteRow(-1);
       }
       console.log("deleted all rows");
-      //delete all rows and add headers + data
-      // apiTable.createTHead()
+
+      //add header
+      apiTable.createTHead().insertRow(0).outerHTML="<tr><th>File name</th><th>arguments</th></tr>";
+
+      //add data
       for(var i in json){
       console.log(json[i]);
-      var fileName = Object.keys(json[i])[0];
+      var fileName = Object.keys(json[i])[0].replace(".json","");
+      var args = Object.values(json[i])[0].arguments;
+      var description = Object.values(json[i])[0].description;
       try{
-        apiTable.rows[i].outerHTML = "<tr><td>"+fileName+"</td></tr>";
+        apiTable.rows[parseInt(i)+1].outerHTML = "<tr><td>"+fileName+"</td><td>"+args+"</td></tr>";
       } catch(e) {
-        apiTable.insertRow(i).outerHTML= "<tr><td>"+fileName+"</td></tr>";
+        apiTable.insertRow(parseInt(i)+1).outerHTML= "<tr><td>"+fileName+"</td><td>"+args+"</td></tr>";
       }
     }
     }
