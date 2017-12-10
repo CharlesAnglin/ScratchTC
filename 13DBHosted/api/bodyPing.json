@@ -1,0 +1,1 @@
+{"arguments" : [], "description" : "Return 200 if request body contains 'healthy'.<br>Return 500 otherwise.", "url" : "charlieanglin.000webhostapp.com/api/bodyPing"}
