@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+
+	<h1>
+	Guess an animal in 5 questions. Think of an animal and try it.
+	</h1>
+
+
+	<div id="question">Ready to start?</div>
+
+	<div id="readyButton">
+		<button class="button" type="button" onclick="start()">Click here to start!</button>
+	</div>
+	<div id="gameButtons" style="display:none">
+      <button class="button" type="button" onclick="getQuestion('0')">NO</button>
+      <button class="button" type="button" onclick="getQuestion('1')">YES</button>
+      <div>
+    	<button class="button" type="button" onclick="reset()">Replay?</button>
+	  </div>
+    </div>
+
+    <div id="counter" class="1"></div>
+
+<script>
+
+	function start(){
+		document.getElementById('readyButton').style.display="none";
+		document.getElementById('gameButtons').style.display="block";
+
+		var currentAwnsers = document.getElementById('counter').className;
+		var requestString = "charlieanglin.000webhostapp.com/api/question.php?awnsers="+currentAwnsers;
+		console.log(requestString);
+		var xhttp = new XMLHttpRequest();
+	    xhttp.open("GET", requestString, false);
+	    xhttp.send();
+	    var question = xhttp.responseText;
+	    console.log("returned entry:\n"+question);
+
+		document.getElementById('question').innerHTML = question;
+	}
+
+	function getQuestion(awnser) {
+		var currentAwnsers = document.getElementById('counter').className;
+		var nextAwnser = currentAwnsers + awnser;
+		document.getElementById('counter').className = nextAwnser;
+		var requestString = "charlieanglin.000webhostapp.com/api/question.php?awnsers="+nextAwnser;
+		console.log(requestString);
+		var xhttp = new XMLHttpRequest();
+	    xhttp.open("GET", requestString, false);
+	    xhttp.send();
+	    var question = xhttp.responseText;
+	    console.log("returned entry:\n"+question);
+
+		document.getElementById('question').innerHTML = question;
+	}
+
+	function reset(){
+		document.getElementById('question').innerHTML = "Ready to start?";
+		document.getElementById('counter').className = "1";
+		document.getElementById('readyButton').style.display="block";
+		document.getElementById('gameButtons').style.display="none";
+	}
+
+</script>
+
+</body>
+</html>
