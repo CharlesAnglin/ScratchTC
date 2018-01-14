@@ -1,0 +1,6 @@
+RewriteEngine on
+RewriteRule ^([^\.]+)$ $1.php
+
+#RewriteRule techChal/api/bodyPing techChal/api/bodyPing.php
+#RewriteRule techChal/api/ping/(.*) techChal/api/ping.php?pingOrPong=$1
+#RewriteRule techChal/api/questions/(.*) techChal/api/questions.php?answers=$1

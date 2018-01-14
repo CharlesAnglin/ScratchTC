@@ -1,0 +1,1 @@
+{"arguments" : [], "description" : "Return 200 and 'PONG' if request body contains 'ping'.<br>Return 500 and 'PING' otherwise.", "url" : "localhost/techChal/api/bodyPing"}
