@@ -460,9 +460,9 @@
       var description = Object.values(json[i])[0].description;
       var url = Object.values(json[i])[0].url;
       try{
-        apiTable.rows[parseInt(i)+1].outerHTML = '<tr><td>'+url+'</td><td>'+args+'</td><td>'+description+'</td><td><button onClick="deleteApi("'+fileName+'")">Delete</button></td></tr>';
+        apiTable.rows[parseInt(i)+1].outerHTML = '<tr><td>'+url+'</td><td>'+args+'</td><td>'+description+'</td><td><button class="button" type="button" onClick="deleteApi("'+fileName+'")">Delete</button></td></tr>';
       } catch(e) {
-        apiTable.insertRow(parseInt(i)+1).outerHTML= '<tr><td>'+url+'</td><td>'+args+'</td><td>'+description+'</td><td><button onClick="deleteApi(\''+fileName+'\')">Delete</button></td></tr>';
+        apiTable.insertRow(parseInt(i)+1).outerHTML= '<tr><td>'+url+'</td><td>'+args+'</td><td>'+description+'</td><td><button class="button" type="button" onClick="deleteApi(\''+fileName+'\')">Delete</button></td></tr>';
       }
     }
     }
@@ -508,9 +508,9 @@
       console.log(json[i]);
       var fileName = Object.keys(json[i])[0];
       try{
-        apiTable.rows[parseInt(i)+1].outerHTML = '<tr><td>'+fileName+'</td><td><button onClick="deleteSavedBlock("'+fileName+'")">Delete</button></td></tr>';
+        apiTable.rows[parseInt(i)+1].outerHTML = '<tr><td>'+fileName+'</td><td><button class="button" type="button" onClick="deleteSavedBlock("'+fileName+'")">Delete</button></td></tr>';
       } catch(e) {
-        apiTable.insertRow(parseInt(i)+1).outerHTML= '<tr><td>'+fileName+'</td><td><button onClick="deleteSavedBlock(\''+fileName+'\')">Delete</button></td></tr>';
+        apiTable.insertRow(parseInt(i)+1).outerHTML= '<tr><td>'+fileName+'</td><td><button class="button" type="button" onClick="deleteSavedBlock(\''+fileName+'\')">Delete</button></td></tr>';
       }
     }
     }
