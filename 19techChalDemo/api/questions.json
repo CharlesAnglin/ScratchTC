@@ -1,0 +1,1 @@
+{"arguments" : ["answers"], "description" : "Returns questions and answers. Initial question begins with answers=1. For subsequent questions append a 0 for a 'no' answer and a 1 for a 'yes' answer.", "url" : "localhost/techChal/api/questions"}

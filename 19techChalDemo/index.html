@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<script src="blocks/blockly/blockly_compressed.js"></script>
+<script src="blocks/blockly/blocks_compressed.js"></script>
+<script src="blocks/blockly/en.js"></script>
+<script src="blocks/blockly/php_compressed.js"></script>
+
+<script src="blocks/getRequest.js"></script>
+<script src="blocks/getRequestGen.js"></script>
+<script src="blocks/postRequest.js"></script>
+<script src="blocks/postRequestGen.js"></script>
+<script src="blocks/putRequest.js"></script>
+<script src="blocks/putRequestGen.js"></script>
+<script src="blocks/deleteRequest.js"></script>
+<script src="blocks/deleteRequestGen.js"></script>
+<script src="blocks/request_body.js"></script>
+<script src="blocks/request_bodyGen.js"></script>
+<script src="blocks/executeSQL.js"></script>
+<script src="blocks/executeSQLGen.js"></script>
+<script src="blocks/SQLResult.js"></script>
+<script src="blocks/SQLResultGen.js"></script>
+
+<div class="tab">
+  <button class="tablinks" onclick="openTab(event, 'Workspace')">Workspace</button>
+  <button class="tablinks" onclick="openTab(event, 'My endpoints');getMyEndpoints()">My endpoints</button>
+  <button class="tablinks" onclick="openTab(event, 'My saved blocks');getMySavedBlocks()">My saved blocks</button>
+</div>
+
+<div id="My endpoints" class="tabcontent">
+  <p><i>This is where you can find what endpoints are currently exposed.</i></p>
+  <p><i>To pass arguments use the optional variable notation, e.g. for a request called boop with two variables x, y use the following url:<br>'/api/boop?x=foo&y=bar'</i></p>
+  <table id="endpoint-table">
+    <tr><td>You haven't defined any endpoints...</td></tr>
+  </table>
+</div>
+
+<div id="My saved blocks" class="tabcontent">
+  <p><i>This is where you can find saved blocks which you have been previously working on.</i></p>
+  <table id="saved-blocks-table">
+    <tr><td>You haven't saved any blocks...</td></tr>
+  </table>
+</div>
+
+<div id="Workspace" class="tabcontent" style="display: block;padding: 15px 15px;">
+
+  <div id="blocklyDiv" style="height: 550px; width: 900px;"></div>
+
+  <xml id="toolbox" style="display: none">
+    <category name="APIs" expanded="false">
+      <block type="getRequest"></block>
+      <block type="postRequest"></block>
+      <block type="putRequest"></block>
+      <block type="deleteRequest"></block>
+      <block type="request_body"></block>
+    </category>
+    <category name="SQL actions">
+      <block type="execute_sql"></block>
+      <block type="sql_result"></block>
+    </category>
+    <category name="Variables" custom="VARIABLE"></category>
+    <category name="Functions">
+      <block type="procedures_defnoreturn"></block>
+      <block type="procedures_defreturn"></block>
+      <block type="procedures_ifreturn"></block>
+    </category>
+    <sep></sep>
+    <category name="Logic">
+      <block type="controls_if"></block>
+      <block type="logic_compare"></block>
+      <block type="logic_operation"></block>
+      <block type="logic_negate"></block>
+      <block type="logic_boolean"></block>
+      <block type="logic_null"></block>
+      <block type="logic_ternary"></block>
+    </category>
+    <category name="Loops">
+      <block type="controls_repeat_ext">
+        <value name="TIMES">
+          <shadow type="math_number">
+            <field name="NUM">10</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="controls_whileUntil"></block>
+      <block type="controls_for">
+        <value name="FROM">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+        <value name="TO">
+          <shadow type="math_number">
+            <field name="NUM">10</field>
+          </shadow>
+        </value>
+        <value name="BY">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="controls_forEach"></block>
+      <block type="controls_flow_statements"></block>
+    </category>
+    <category name="Maths">
+      <block type="math_number"></block>
+      <block type="math_arithmetic">
+        <value name="A">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+        <value name="B">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="math_single">
+        <value name="NUM">
+          <shadow type="math_number">
+            <field name="NUM">9</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="math_trig">
+        <value name="NUM">
+          <shadow type="math_number">
+            <field name="NUM">45</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="math_constant"></block>
+      <block type="math_number_property">
+        <value name="NUMBER_TO_CHECK">
+          <shadow type="math_number">
+            <field name="NUM">0</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="math_round">
+        <value name="NUM">
+          <shadow type="math_number">
+            <field name="NUM">3.1</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="math_on_list"></block>
+      <block type="math_modulo">
+        <value name="DIVIDEND">
+          <shadow type="math_number">
+            <field name="NUM">64</field>
+          </shadow>
+        </value>
+        <value name="DIVISOR">
+          <shadow type="math_number">
+            <field name="NUM">10</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="math_constrain">
+        <value name="VALUE">
+          <shadow type="math_number">
+            <field name="NUM">50</field>
+          </shadow>
+        </value>
+        <value name="LOW">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+        <value name="HIGH">
+          <shadow type="math_number">
+            <field name="NUM">100</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="math_random_int">
+        <value name="FROM">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+        <value name="TO">
+          <shadow type="math_number">
+            <field name="NUM">100</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="math_random_float"></block>
+    </category>
+    <category name="Text">
+      <block type="text"></block>
+      <block type="text_join"></block>
+      <block type="text_append">
+        <value name="TEXT">
+          <shadow type="text"></shadow>
+        </value>
+      </block>
+      <block type="text_length">
+        <value name="VALUE">
+          <shadow type="text">
+            <field name="TEXT">abc</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="text_isEmpty">
+        <value name="VALUE">
+          <shadow type="text">
+            <field name="TEXT"></field>
+          </shadow>
+        </value>
+      </block>
+      <block type="text_indexOf">
+        <value name="VALUE">
+          <block type="variables_get">
+            <field name="VAR">{textVariable}</field>
+          </block>
+        </value>
+        <value name="FIND">
+          <shadow type="text">
+            <field name="TEXT">abc</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="text_charAt">
+        <value name="VALUE">
+          <block type="variables_get">
+            <field name="VAR">{textVariable}</field>
+          </block>
+        </value>
+      </block>
+      <block type="text_getSubstring">
+        <value name="STRING">
+          <block type="variables_get">
+            <field name="VAR">{textVariable}</field>
+          </block>
+        </value>
+      </block>
+      <block type="text_changeCase">
+        <value name="TEXT">
+          <shadow type="text">
+            <field name="TEXT">abc</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="text_trim">
+        <value name="TEXT">
+          <shadow type="text">
+            <field name="TEXT">abc</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="text_print">
+        <value name="TEXT">
+          <shadow type="text">
+            <field name="TEXT">abc</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="text_prompt_ext">
+        <value name="TEXT">
+          <shadow type="text">
+            <field name="TEXT">abc</field>
+          </shadow>
+        </value>
+      </block>
+    </category>
+    <category name="Lists">
+      <block type="lists_create_with">
+        <mutation items="0"></mutation>
+      </block>
+      <block type="lists_create_with"></block>
+      <block type="lists_repeat">
+        <value name="NUM">
+          <shadow type="math_number">
+            <field name="NUM">5</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="lists_length"></block>
+      <block type="lists_isEmpty"></block>
+      <block type="lists_indexOf">
+        <value name="VALUE">
+          <block type="variables_get">
+            <field name="VAR">{listVariable}</field>
+          </block>
+        </value>
+      </block>
+      <block type="lists_getIndex">
+        <value name="VALUE">
+          <block type="variables_get">
+            <field name="VAR">{listVariable}</field>
+          </block>
+        </value>
+      </block>
+      <block type="lists_setIndex">
+        <value name="LIST">
+          <block type="variables_get">
+            <field name="VAR">{listVariable}</field>
+          </block>
+        </value>
+      </block>
+      <block type="lists_getSublist">
+        <value name="LIST">
+          <block type="variables_get">
+            <field name="VAR">{listVariable}</field>
+          </block>
+        </value>
+      </block>
+      <block type="lists_split">
+        <value name="DELIM">
+          <shadow type="text">
+            <field name="TEXT">,</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="lists_sort"></block>
+    </category>
+  </xml>
+
+  <div style="padding: 5px 5px;">
+    <p><i>Expose your created endpoint by clicking here</i></p>
+    <button class="button" type="button" onclick="execute()">Create API</button>
+  </div>
+  <div style="padding: 10px 60px;">
+    <div style="padding: 5px 5px;">
+    <p><i>Import a previously saved block or export a block to save it.</i></p>
+      block name
+      <input type="text" id="blockNameInput">
+    </div>
+    <div>
+      <button class="button" type="button" onclick="exportBlocks(document.getElementById('blockNameInput').value)">export block</button>
+      <button class="button" type="button" onclick="importBlocks(document.getElementById('blockNameInput').value)">import block</button>
+    </div>
+  </div>
+</div>
+
+
+
+<script>
+  var workspacePlayground = Blockly.inject('blocklyDiv',
+      {toolbox: document.getElementById('toolbox')});
+
+  function execute() {
+    var code = Blockly.PHP.workspaceToCode(workspacePlayground);
+
+    console.log("raw output:\n" + code)
+
+    try {
+      var cleanedCode = code.replace("// Describe this function...\n", "");
+
+      var filenameExtractArray = removeDelimiters(cleanedCode, "\n<fileName>\n");
+      var codeWithoutFileName = filenameExtractArray[0];
+      var fileName = filenameExtractArray[1][0].replace("'","").replace("'","");
+      var argumentsExtractArray = removeDelimiters(codeWithoutFileName, "\n<arguments>\n");
+      var codeWithoutArugments = argumentsExtractArray[0];
+      var argumentsArray = argumentsExtractArray[1];
+      var commentExtractArray = removeDelimiters(codeWithoutArugments, "\n<commentDelim>\n");
+      var code = commentExtractArray[0];
+      var comment = commentExtractArray[1][0].replace(/(\r\n|\n|\r)/gm,"<br>").replace(/"/g, "'");
+      var phpCode = "<?php\n" + code + "\n?>";
+
+      console.log("api arguments: " + argumentsArray);
+      console.log("route: " + fileName);
+      console.log("phpCode: " + phpCode);
+      console.log("comment: " + comment);
+
+      var xhttp = new XMLHttpRequest();
+      xhttp.open("POST", "phpScripts/saveAPI.php?fileName="+fileName+".php", true);
+      xhttp.send(phpCode);
+
+      var jsonArguments = JSON.stringify(argumentsArray);
+      var apiDescription = '{"arguments" : '+jsonArguments+', "description" : "'+comment+'", "url" : "'+document.domain+'/techChal/api/'+fileName+'"}';
+      console.log(apiDescription);
+
+      var xhttp = new XMLHttpRequest();
+      xhttp.open("POST", "phpScripts/saveAPI.php?fileName="+fileName+".json", true);
+      xhttp.send(apiDescription);
+
+    } catch (e) {
+      console.log(e);
+      alert("To export an API you must use an API block");
+    }
+  }
+
+// returns a two item array. First elt being the code as a string with the delimiter removed. Second elt being an array of values which the delmiters contained (as there might be multiple delimiters).
+  function removeDelimiters(codeString, delimiterString) {
+    var codeArray = codeString.split(delimiterString);
+    if(codeArray.length==1){
+      var returnCode = codeArray[0];
+    } else {
+      var returnCode = codeArray[0] + codeArray[codeArray.length-1];
+    };
+    var delimiterInfo = codeArray.slice(1,codeArray.length-1).filter(function(n){ return n != ','});
+    return [returnCode, delimiterInfo];
+  }
+
+  function exportBlocks(fileName) {
+    var exportXml = Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(workspacePlayground));
+    console.log("exporting blocks:\n" + exportXml);
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "phpScripts/saveBlock.php?fileName="+fileName, true);
+    xhttp.send(exportXml);
+  }
+
+  function importBlocks(fileName) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", "phpScripts/getBlock.php?fileName="+fileName, false);
+    xhttp.send();
+    var xml = xhttp.responseText;
+    console.log("returned xml:\n"+xml);
+    Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(xml), workspacePlayground);
+  }
+
+  function getMyEndpoints() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", "phpScripts/getAPI.php", false);
+    xhttp.send();
+    var json = JSON.parse(xhttp.responseText);
+    console.log("returned json:\n"+JSON.stringify(json));
+    // document.getElementById('myEnpointsJson').innerHTML = JSON.stringify(json);
+
+    // Object.keys(json).forEach(function(key){
+    //   console.log("json key: " + key);
+    // });
+
+    // console.log(Object.keys(json[0])[0]);
+    var apiTable = document.getElementById("endpoint-table");
+    if(json.length==0 && apiTable.rows[0].innerHTML.includes("You haven't defined any endpoints")){
+      //leave it alone
+      console.log("leave table alone!");
+    } else if (json.length==0){
+      //delete all rows and add back in "no rows" message
+      for(var row in apiTable.rows){
+        apiTable.deleteRow(-1);
+      }
+      apiTable.insertRow(0).outerHTML="<tr><td>You haven't defined any endpoints...</td></tr>";
+    } else {
+      //delete all rows and add headers + data
+      for(var row in apiTable.rows){
+        apiTable.deleteRow(-1);
+      }
+      console.log("deleted all rows");
+
+      //add header
+      apiTable.createTHead().insertRow(0).outerHTML="<tr><th>Url</th><th>Arguments</th><th>Description</th><th>Delete</th></tr>";
+
+      //add data
+      for(var i in json){
+      console.log(json[i]);
+      var fileName = Object.keys(json[i])[0].replace(".json","");
+      var args = Object.values(json[i])[0].arguments;
+      var description = Object.values(json[i])[0].description;
+      var url = Object.values(json[i])[0].url;
+      try{
+        apiTable.rows[parseInt(i)+1].outerHTML = '<tr><td>'+url+'</td><td>'+args+'</td><td>'+description+'</td><td><button class="button" type="button" onClick="deleteApi("'+fileName+'")">Delete</button></td></tr>';
+      } catch(e) {
+        apiTable.insertRow(parseInt(i)+1).outerHTML= '<tr><td>'+url+'</td><td>'+args+'</td><td>'+description+'</td><td><button class="button" type="button" onClick="deleteApi(\''+fileName+'\')">Delete</button></td></tr>';
+      }
+    }
+    }
+  }
+
+  function deleteApi(fileName) {
+    var xhttp = new XMLHttpRequest();
+    var url = "phpScripts/deleteAPI.php?fileName=" + fileName
+    xhttp.open("GET", url, false);
+    xhttp.send();
+    getMyEndpoints();
+  }
+
+  function getMySavedBlocks() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", "phpScripts/getSavedBlocks.php", false);
+    xhttp.send();
+    var json = JSON.parse(xhttp.responseText);
+    console.log("returned json:\n"+JSON.stringify(json));
+
+    var apiTable = document.getElementById("saved-blocks-table");
+    if(json.length==0 && apiTable.rows[0].innerHTML.includes("You haven't saved any blocks")){
+      //leave it alone
+      console.log("leave table alone!");
+    } else if (json.length==0){
+      //delete all rows and add back in "no rows" message
+      for(var row in apiTable.rows){
+        apiTable.deleteRow(-1);
+      }
+      apiTable.insertRow(0).outerHTML="<tr><td>You haven't saved any blocks...</td></tr>";
+    } else {
+      //delete all rows and add headers + data
+      for(var row in apiTable.rows){
+        apiTable.deleteRow(-1);
+      }
+      console.log("deleted all rows");
+
+      //add header
+      apiTable.createTHead().insertRow(0).outerHTML="<tr><th>Name</th><th>Delete</th></tr>";
+
+      //add data
+      for(var i in json){
+      console.log(json[i]);
+      var fileName = Object.keys(json[i])[0];
+      try{
+        apiTable.rows[parseInt(i)+1].outerHTML = '<tr><td>'+fileName+'</td><td><button class="button" type="button" onClick="deleteSavedBlock("'+fileName+'")">Delete</button></td></tr>';
+      } catch(e) {
+        apiTable.insertRow(parseInt(i)+1).outerHTML= '<tr><td>'+fileName+'</td><td><button class="button" type="button" onClick="deleteSavedBlock(\''+fileName+'\')">Delete</button></td></tr>';
+      }
+    }
+    }
+  }
+
+  function deleteSavedBlock(fileName) {
+    var xhttp = new XMLHttpRequest();
+    var url = "phpScripts/deleteSavedBlock.php?fileName=" + fileName
+    xhttp.open("GET", url, false);
+    xhttp.send();
+    getMySavedBlocks();
+  }
+
+  function openTab(evt, tabName) {
+    // Declare all variables
+    var i, tabcontent, tablinks;
+
+    // Get all elements with class="tabcontent" and hide them
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+
+    // Get all elements with class="tablinks" and remove the class "active"
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+
+    // Show the current tab, and add an "active" class to the button that opened the tab
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.className += " active";
+  }
+</script>
+
+</body>
+</html>
